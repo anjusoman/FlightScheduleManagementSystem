@@ -1,0 +1,20 @@
+{
+    "TableName": "ScheduledFlight",
+    "KeySchema": [
+      {
+        "AttributeName": "flightId",
+        "KeyType": "HASH"
+      }
+    ],
+    "AttributeDefinitions": [
+      {
+        "AttributeName": "flightId",
+        "AttributeType": "S"
+      }
+    ],
+    "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+    }
+  }
+  
