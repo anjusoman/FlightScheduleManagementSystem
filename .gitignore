@@ -1,0 +1,5 @@
+**/localstack-venv/
+**__pycache__/
+./Build
+
+

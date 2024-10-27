@@ -16,4 +16,4 @@ RUN chmod +x ./gradlew
 RUN ./gradlew clean build
 
 # Run the application
-ENTRYPOINT ["java", "-jar", "build/libs/demo-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "./build/libs/SchedulingService-0.0.1-SNAPSHOT.jar"]
