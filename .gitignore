@@ -1,5 +1,4 @@
 **/localstack-venv/
 **__pycache__/
 ./Build
-
-
+dynamodb/shared-local-instance.db
