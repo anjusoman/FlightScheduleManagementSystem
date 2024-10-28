@@ -64,18 +64,11 @@ services:
 
   localstack:
     container_name: localstack
-    image: localstack/localstack:latest
+    build:
+      context: Localstack
+      dockerfile: Dockerfile
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - "127.0.0.1:4510-4559:4510-4559" 
       - "127.0.0.1:4566:4566" 
-    environment:
-      - DEBUG=0
-      - DOCKER_HOST=unix:///var/run/docker.sock
-      - SERVICES=lambda,events
-      - AWS_ACCESS_KEY_ID=FAKEID
-      - AWS_SECRET_ACCESS_KEY=FAKEKEY
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./LocalStack/setup_localstack.sh:/usr/local/bin/setup_localstack.sh
-      - ./LocalStack/create_lambda.bash:/usr/local/bin/create_lambda.bash
-    entrypoint: ["/bin/sh", "-c", "/usr/local/bin/setup_localstack.sh && localstack start"]
