@@ -5,54 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Status Dashboard</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        #flight-list {
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h1>Real-Time Flight Updates</h1>
-    <div id="flight-list"></div>
+    <h1>Real-Time Flight Schedules</h1>
+    <table id="flight-table">
+        <thead>
+            <tr>
+                <th>Flight Number</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="flight-list">
+            
+        </tbody>
+    </table>
 
     <script>
         // Connect to the Socket.IO server
         const socket = io();
 
-        // Listen for the connection event
-        socket.on('connection', function(data) {
-            console.log(data);
-        });
-
-        
         // Listen for 'new_flight' events from the server
         socket.on('new_flight', function(data) {
-            
-            const flightEntry = document.createElement('div');
-            const flightId = data.flightId;
-            const flightNumber = data.flightNumber;
-            const departure = data.departure;
-            const arrival = data.arrival;
-            const flightStatus = data.flightStatus;
-
-            flightEntry.textContent = `
-                Flight Number: ${flightNumber}, 
-                Departure: ${departure.airport} (Terminal: ${departure.terminal}, Gate: ${departure.gate}, Scheduled: ${departure.scheduledDate} ${departure.scheduledTime}),
-                Arrival: ${arrival.airport} (Terminal: ${arrival.terminal}, Gate: ${arrival.gate}, Scheduled: ${arrival.scheduledDate} ${arrival.scheduledTime})
-                FlightStatus: ${flightStatus}
-                `;
-
-            // Add the new flight entry to the flight list
             const flightList = document.getElementById('flight-list');
-            flightList.appendChild(flightEntry);
+
+            const row = document.createElement('tr');
+            const flightNumberCell = document.createElement('td');
+            const departureCell = document.createElement('td');
+            const arrivalCell = document.createElement('td');
+            const statusCell = document.createElement('td');
+
+            flightNumberCell.textContent = data.flightNumber;
+            departureCell.innerHTML = `${data.departure.airport} (Terminal: ${data.departure.terminal}, Gate: ${data.departure.gate}, Scheduled: ${data.departure.scheduledDate} ${data.departure.scheduledTime})`;
+            arrivalCell.innerHTML = `${data.arrival.airport} (Terminal: ${data.arrival.terminal}, Gate: ${data.arrival.gate}, Scheduled: ${data.arrival.scheduledDate} ${data.arrival.scheduledTime})`;
+            statusCell.textContent = data.flightStatus;
+            statusCell.classList.add(`status-${data.flightStatus.toLowerCase()}`);
+
+
+            row.appendChild(flightNumberCell);
+            row.appendChild(departureCell);
+            row.appendChild(arrivalCell);
+            row.appendChild(statusCell);
+
+            flightList.appendChild(row);
         });
-
-
-
     </script>
 </body>
 </html>

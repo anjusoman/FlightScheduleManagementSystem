@@ -1,0 +1,95 @@
+/* Body and Heading Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f0f4f8;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Table Styles */
+#flight-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+/* Table Header Styles */
+#flight-table th {
+    background: linear-gradient(135deg, #3b82f6, #4f46e5);
+    color: white;
+    font-weight: bold;
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 1rem;
+}
+
+/* Table Row Styles */
+#flight-table td {
+    padding: 12px 20px;
+    text-align: left;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* Alternating Row Colors */
+#flight-table tr:nth-child(even) {
+    background-color: #e3e8f1;
+}
+
+#flight-table tr:nth-child(odd) {
+    background-color: #f7fafc;
+}
+
+/* Hover Effect on Rows */
+#flight-table tr:hover {
+    background-color: #c7d2fe;
+    color: #222;
+    cursor: pointer;
+}
+
+/* Column Width Adjustments */
+#flight-table th:nth-child(1), #flight-table td:nth-child(1) {
+    width: 15%;
+}
+
+#flight-table th:nth-child(2), #flight-table td:nth-child(2) {
+    width: 35%;
+}
+
+#flight-table th:nth-child(3), #flight-table td:nth-child(3) {
+    width: 35%;
+}
+
+#flight-table th:nth-child(4), #flight-table td:nth-child(4) {
+    width: 15%;
+}
+
+/* Styling for Text Content */
+#flight-table td {
+    white-space: nowrap;
+}
+
+#flight-table td:nth-child(4) {
+    font-weight: bold;
+}
+
+/* Status-Specific Colors */
+#flight-table td:nth-child(4).status-on-time {
+    color: #10b981; /* Green for on-time flights */
+}
+
+#flight-table td:nth-child(4).status-delayed {
+    color: #f59e0b; /* Yellow for delayed flights */
+}
+
+#flight-table td:nth-child(4).status-cancelled {
+    color: #ef4444; /* Red for cancelled flights */
+}
