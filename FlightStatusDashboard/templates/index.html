@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Status Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #flight-list {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Real-Time Flight Updates</h1>
+    <div id="flight-list"></div>
+
+    <script>
+        // Connect to the Socket.IO server
+        const socket = io();
+
+        // Listen for the connection event
+        socket.on('connection', function(data) {
+            console.log(data);
+        });
+
+        
+        // Listen for 'new_flight' events from the server
+        socket.on('new_flight', function(data) {
+            
+            const flightEntry = document.createElement('div');
+            const flightId = data.flightId;
+            const flightNumber = data.flightNumber;
+            const departure = data.departure;
+            const arrival = data.arrival;
+            const flightStatus = data.flightStatus;
+
+            flightEntry.textContent = `
+                Flight Number: ${flightNumber}, 
+                Departure: ${departure.airport} (Terminal: ${departure.terminal}, Gate: ${departure.gate}, Scheduled: ${departure.scheduledDate} ${departure.scheduledTime}),
+                Arrival: ${arrival.airport} (Terminal: ${arrival.terminal}, Gate: ${arrival.gate}, Scheduled: ${arrival.scheduledDate} ${arrival.scheduledTime})
+                FlightStatus: ${flightStatus}
+                `;
+
+            // Add the new flight entry to the flight list
+            const flightList = document.getElementById('flight-list');
+            flightList.appendChild(flightEntry);
+        });
+
+
+
+    </script>
+</body>
+</html>

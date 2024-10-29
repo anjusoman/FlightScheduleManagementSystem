@@ -1,6 +1,11 @@
-import boto3
-import botocore
+import requests
+import json
 
 def lambda_handler(event, context):
-   print(f'boto3 version: {boto3.__version__}')
-   print(f'botocore version: {botocore.__version__}')
+    # Forward the event to the Flight Status Dashboard
+    response = requests.post("http://flight-status-dashboard:5000/new-flight-event", json=event)
+
+    return {
+        'statusCode': response.status_code,
+        'body': json.dumps(response.json())
+    }

@@ -35,18 +35,17 @@ aws --endpoint-url http://localhost:4566 events put-rule \
 
 # Create a lambda function to handle the event
 aws --endpoint-url $LOCALSTACK_URL lambda create-function \
-    --function-name hello \
+    --function-name update-flight-schedule \
     --runtime python3.9 \
     --handler lambda_function.lambda_handler \
-    --zip-file fileb://lambda_function.zip \
+    --zip-file fileb://flight_event_lambda_function.zip \
     --role arn:aws:iam::000000000000:role/localstack-does-not-care \
     --profile localstack
 [ $? == 0 ] || fail 1 "Failed: AWS / lambda / create-function"
+function_arn=$(aws --endpoint-url $LOCALSTACK_URL lambda get-function --function-name update-flight-schedule --profile localstack --query 'Configuration.FunctionArn' --output text)
 
-function_arn=$(aws --endpoint-url $LOCALSTACK_URL lambda get-function --function-name hello --profile localstack --query 'Configuration.FunctionArn' --output text)
 
-
-# Assign the lambda function as the event target
+# Assign the update-flight-schedule lambda function as the event target
 aws --endpoint-url $LOCALSTACK_URL events put-targets \
   --rule FlightScheduleEventRule \
   --event-bus-name EventBus \
@@ -57,5 +56,3 @@ aws --endpoint-url $LOCALSTACK_URL events put-targets \
   --profile localstack
 [ $? == 0 ] || fail 1 "Failed: AWS / events / put-targets"
 
-
-# aws --endpoint http://localhost:4566/ lambda invoke --function-name hello --invocation-type RequestResponse --payload '{ "hello": "world" }' response.json --profile localstack

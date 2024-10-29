@@ -3,8 +3,6 @@ package personal.schedulingservice.config;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
-
-
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
@@ -36,7 +34,7 @@ public class DynamoDBConfig {
    }
 
    private AmazonDynamoDB buildAmazonDynamoDB() {
-       BasicAWSCredentials credentials = new BasicAWSCredentials("FAKEID", "FAKEKEY");
+       BasicAWSCredentials credentials = new BasicAWSCredentials(awsAccessKey, awsSecretKey);
 
        return AmazonDynamoDBClientBuilder.standard()
                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(dynamoDbEndpoint, awsRegion))

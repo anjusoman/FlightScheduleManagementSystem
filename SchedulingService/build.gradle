@@ -22,12 +22,19 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+    // eventbridge dependency
+    implementation 'software.amazon.awssdk:eventbridge:2.20.20'
+
     // dynamodb aws sdk dependency
-    implementation group: 'com.amazonaws', name: 'aws-java-sdk-dynamodb', version: '1.12.497'
+    implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.12.497'
 
     // lombok dependency
     implementation 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    // gson dependency
+    implementation 'com.google.code.gson:gson:2.8.8'
+
 }
 
 tasks.named('test') {

@@ -1,5 +1,6 @@
 package personal.schedulingservice.service;
 
+import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -8,13 +9,13 @@ import org.springframework.stereotype.Service;
 import personal.schedulingservice.model.*;
 import personal.schedulingservice.repository.ScheduledFlightRepository;
 import personal.schedulingservice.util.DateTimeConverter;
+import personal.schedulingservice.util.ObjectToJsonConverter;
 
 import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
 @AllArgsConstructor
-
 public class MockFlightGenerationService {
 
     private final Random random;
@@ -25,7 +26,7 @@ public class MockFlightGenerationService {
     private final String[] gates;
 
     private final ScheduledFlightRepository scheduledFlightRepository;
-
+    private final EventProducerService eventProducerService;
     private int getRandomIndex(int arrLength) {
         return random.nextInt(arrLength);
     }
@@ -46,6 +47,11 @@ public class MockFlightGenerationService {
                                                         .liveFlightData(liveFlightData)
                                                         .build();
         scheduledFlightRepository.createScheduledFlight(scheduledFlight);
+
+
+        String jsonString = ObjectToJsonConverter.convertObjectToJson(scheduledFlight);
+        String detailType = "new-flight-event";
+        eventProducerService.PutEvent(jsonString, detailType);
     }
 
     private FlightEvent generateRandomFlightDeparture(){

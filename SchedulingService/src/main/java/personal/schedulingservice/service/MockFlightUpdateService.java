@@ -14,13 +14,5 @@ public class MockFlightUpdateService {
 //        return scheduledFlight;
 //    }
 //
-//    public ScheduledFlight
-//    public ScheduledFlight
-//    SCHEDULED,
-//    ACTIVE,
-//    LANDED,
-//    CANCELLED,
-//    DELAYED,
-//    DIVERTED
 
 }
