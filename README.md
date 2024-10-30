@@ -19,8 +19,7 @@
 In order to run this project, use the docker-compose up command. 
 
 ## Demo:
-![image](https://github.com/user-attachments/assets/a2194f20-3bf1-459a-80ab-5f93b83fe494)
-
+![demo](https://github.com/user-attachments/assets/cb99d1a5-4452-4740-944d-b82fd44995ba)
 
 
 This dashboard is being updated in real time as events are scheduled by the scheduling service. The work flow is as follows:
