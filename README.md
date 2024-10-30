@@ -19,7 +19,9 @@
 In order to run this project, use the docker-compose up command. 
 
 ## Demo:
-![FlightScheduleManagementSystemDemo](https://github.com/user-attachments/assets/c28c9016-aa5b-443d-8637-7a93533ecbf9)
+![image](https://github.com/user-attachments/assets/a2194f20-3bf1-459a-80ab-5f93b83fe494)
+
+
 
 This dashboard is being updated in real time as events are scheduled by the scheduling service. The work flow is as follows:
 1. The scheduling service schedules a flight. It stores it in the DynamoDB database and then puts an event on the eventbus that corresponds to the newly scheduled flight.
