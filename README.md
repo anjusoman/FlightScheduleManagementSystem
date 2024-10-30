@@ -1,4 +1,4 @@
-# FlightStatusManagementSystem
+# Flight Schedule Management System
 
 
 ![image](https://github.com/user-attachments/assets/71e44673-0461-4617-9b4d-6fe423fbbba7)
